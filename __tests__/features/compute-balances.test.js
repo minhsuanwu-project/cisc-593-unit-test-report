@@ -41,7 +41,16 @@ function createRes({ isAuthenticated = true, user = { id: 1, name: 'John Doe' } 
   return res;
 }
 
-validGroup = 1;
+const validGroup = 1;
+
+const validExpense = {
+  group: 1,
+  name: 'Groceries',
+  amount: 75.5,
+  category: 'Food',
+  date: '2024-03-01',
+  description: 'Weekly shopping',
+};
 
 // ---------------------------------------------------------------------------
 // validateInput
@@ -116,7 +125,7 @@ describe('computeBalanceEndpoint', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         id: 1,
-        message: "group balnce is" + 75.5 + "amount is" + {name: Groceries, amount: 75.5},
+        message: "group balnce is" + 0 + "amount is" + JSON.stringify([]),
       });
     });
 

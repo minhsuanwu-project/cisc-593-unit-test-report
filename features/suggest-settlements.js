@@ -1,4 +1,4 @@
-import splitExpenseEndpoint from '../../features/split-expense.js';
+import splitExpenseEndpoint from './split-expense.js';
 import { z } from 'zod';
 
 const settlementInputSchema = z.object({
@@ -36,12 +36,12 @@ const suggestedSettlementEndpoint = (db) => (req, res) => {
   });
 
   
-  res.status(200).json({ id: result.group_id, message: 'What plan would you like to use: equal, percent, shares' });
+  res.status(200).json({ id: dataObject.group, message: 'What plan would you like to use: equal, percent, shares' });
 };
 
 export const validateInput = (data) => {
   // validate the input using the Zod schema
-  const result = RecordInputSchema.safeParse(data);
+  const result = settlementInputSchema.safeParse(data);
   return result.success;
 };
 

@@ -34,18 +34,21 @@ const computeBalanceEndpoint = (db) => (req, res) => {
   });
 
   const balance = [];
-  const sum = 0;
-  result.data.forEach(element => {
-        balance.append({name: element.name, amount: element.amount});
+  let sum = 0;
+  const rows = Array.isArray(result.data) ? result.data : [];
+  rows.forEach(element => {
+        balance.push({name: element.name, amount: element.amount});
         sum = sum + element.amount;
         
   });
-  res.status(200).json({ id: result.group_id, message: "group balnce is" + sum + "amount is" + balance});
+  res.status(200).json({ id: dataObject.group, message: "group balnce is" + sum + "amount is" + JSON.stringify(balance)});
 };
 
 export const validateInput = (data) => {
-  // validate the input using the Zod schema
-  const result = RecordInputSchema.safeParse(data);
-  return result.success;
+  // Accept a plain positive integer group id OR an object with a positive integer group field
+  if (typeof data === 'number') {
+    return z.number().int().positive().safeParse(data).success;
+  }
+  return GroupBalenceSchema.safeParse(data).success;
 };
 export default computeBalanceEndpoint;

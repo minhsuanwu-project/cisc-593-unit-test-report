@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { validateInput } from '../../features/suggested-settlement.js';
-import suggestedSettlementEndpoint from '../../features/suggested-settlement.js';
+import { validateInput } from '../../features/suggest-settlements.js';
+import suggestedSettlementEndpoint from '../../features/suggest-settlements.js';
 
 // ---------------------------------------------------------------------------
 // Helpers

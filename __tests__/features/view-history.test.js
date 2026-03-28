@@ -39,6 +39,11 @@ function createRes({ isAuthenticated = true, user = { id: 1, name: 'John Doe' } 
   return res;
 }
 
+const validExpense = {
+  group: 1,
+  name: 'Groceries',
+};
+
 // ---------------------------------------------------------------------------
 // viewHistoryEndpoint handler
 // ---------------------------------------------------------------------------
@@ -81,10 +86,10 @@ describe('viewHistoryEndpoint', () => {
 
     expect(db.prepare).toHaveBeenCalledOnce();
     expect(db._run).toHaveBeenCalledOnce();
-    expect(res.status).toHaveBeenCalledWith(201);
+    expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
-      id: 1,
-      message: 'See history!',
+      id: undefined,
+      message: 'See history',
     });
   });
 

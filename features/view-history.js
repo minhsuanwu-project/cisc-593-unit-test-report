@@ -1,3 +1,13 @@
+import { z } from 'zod';
+
+const viewHistorySchema = z.object({
+  group: z.number().int().positive(),
+});
+
+export const validateInput = (data) => {
+  return viewHistorySchema.safeParse(data).success;
+};
+
 /**
  * Factory that accepts a db instance and returns the Express route handler.
  * @param {import('better-sqlite3').Database} db
